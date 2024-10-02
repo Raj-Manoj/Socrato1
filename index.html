@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Generative AI Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        text-align: center;
+        color: #007bff;
+      }
+      input[type="text"] {
+        width: calc(100% - 22px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid #007bff;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      #contentDisplay {
+        margin-top: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Socratic AI Teaching Assistant</h1>
+    <input type="text" id="promptInput" placeholder="Enter your prompt here" />
+    <div style="color: #c4c4c4">
+      If you want to chat on a new topic please refresh the page.
+    </div>
+    <button id="generateButton">Generate Content</button>
+    <div id="contentDisplay"></div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      // Fetch your API_KEY
+      const API_KEY = "AIzaSyDlQOJwb9IGjRzHYKZAzgKRri4YjpMY3MA";
+      const genAI = new GoogleGenerativeAI(API_KEY);
+      let previous_prompts = "The previous prompts are: ";
+
+      document
+        .getElementById("generateButton")
+        .addEventListener("click", async () => {
+          const prompt = document.getElementById("promptInput").value;
+          if (prompt.trim() === "") {
+            alert("Please enter a prompt.");
+            return;
+          }
+
+          const model = await genAI.getGenerativeModel({
+            model: "gemini-1.5-flash",
+          });
+
+          const content = await model.generateContent([
+            prompt,
+
+            "Ask me questions about the prompt above so that I can generate answers through a Socratic dialogue, teaching., remember the key concepts and ideas of my previous prompts to take me to my answer." +
+              previous_prompts,
+          ]);
+          console.log(content.response.text());
+          document.getElementById("contentDisplay").innerText =
+            content.response.text();
+          previous_prompts = previous_prompts + prompt + ", ";
+        });
+    </script>
+  </body>
+</html>

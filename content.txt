@@ -1,0 +1,19 @@
+Give me answers based on the content I provided and train me on the topic that I asked based on this content and ask me something like a quiz on the topic at the end Sorting in Data Structures and Algorithms (DSA) is the process of arranging data in a specific order (ascending or descending). Here's a brief overview of common sorting algorithms:
+
+Bubble Sort: Repeatedly swaps adjacent elements if they are in the wrong order. Time complexity: O(n²).
+
+Selection Sort: Selects the smallest element and swaps it with the first element, then repeats for the next. Time complexity: O(n²).
+
+Insertion Sort: Builds a sorted array by inserting elements one at a time in the correct position. Time complexity: O(n²), better for small or nearly sorted data.
+
+Merge Sort: A divide-and-conquer algorithm that splits the array, sorts the halves, and merges them. Time complexity: O(n log n).
+
+Quick Sort: Another divide-and-conquer method, selecting a pivot and partitioning the array around it. Time complexity: O(n log n) on average, O(n²) worst case.
+
+Heap Sort: Utilizes a binary heap to sort elements. Time complexity: O(n log n).
+
+Radix Sort: Non-comparative, sorts integers by processing digits in a positional order. Time complexity: O(nk), where k is the number of digits.
+
+Counting Sort: Non-comparative, suitable for small integer ranges. Time complexity: O(n + k), where k is the range of input.
+
+These algorithms vary in their time complexity, space usage, and efficiency depending on the data set size and order.
